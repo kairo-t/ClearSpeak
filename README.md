@@ -1,4 +1,5 @@
-![Clearspeak Logo](/images/logo.png)
+![Clearspeak Logo]
+<img src="/images/logo.png" width="200">
 
 # Clearspeak
 
