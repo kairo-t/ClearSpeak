@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ClearSpeakApi.Models;
+using ClearSpeakApi.Data;
 
 namespace ClearSpeakApi.Controllers
 {
@@ -7,6 +8,15 @@ namespace ClearSpeakApi.Controllers
     [Route("api/chats/{chatId}/[controller]")]
     public class MessagesController : ControllerBase
     {
+        private readonly ILogger<MessagesController> _logger;
+        private readonly ApplicationDbContext _context;
+
+        public MessagesController(ILogger<MessagesController> logger, ApplicationDbContext context)
+        {
+            _logger = logger;
+            _context = context;
+        }
+
         // POST /api/chats/{chatId}/messages (send a new message)
         [HttpPost]
         public IActionResult SendMessage(string chatId, [FromBody] Message message)

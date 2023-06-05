@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ClearSpeakApi.Models;
+using ClearSpeakApi.Data;
 
 namespace ClearSpeakApi.Controllers
 {
@@ -7,6 +8,15 @@ namespace ClearSpeakApi.Controllers
     [Route("api/[controller]")]
     public class NotificationsController : ControllerBase
     {
+        private readonly ILogger<NotificationsController> _logger;
+        private readonly ApplicationDbContext _context;
+
+        public NotificationsController(ILogger<NotificationsController> logger, ApplicationDbContext context)
+        {
+            _logger = logger;
+            _context = context;
+        }
+
         // POST /api/notifications (send a notification)
         [HttpPost]
         public IActionResult SendNotification([FromBody] Notification notification)

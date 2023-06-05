@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ClearSpeakApi.Models;
+using ClearSpeakApi.Data;
 
 namespace ClearSpeakApi.Controllers
 {
@@ -7,6 +8,15 @@ namespace ClearSpeakApi.Controllers
     [Route("api/[controller]")]
     public class ContactsController : ControllerBase
     {
+        private readonly ILogger<ContactsController> _logger;
+        private readonly ApplicationDbContext _context;
+
+        public ContactsController(ILogger<ContactsController> logger, ApplicationDbContext context)
+        {
+            _logger = logger;
+            _context = context;
+        }
+
         // POST /api/contacts (add a contact)
         [HttpPost]
         public IActionResult AddContact([FromBody] Contact contact)
